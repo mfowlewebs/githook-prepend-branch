@@ -7,3 +7,7 @@ Find the current branch name, and look for a DG-nnn ticket number in it to prepe
 # Usage
 
 To use, copy prepare-commit-msg into the target project's `.git/hooks` directory.
+
+# Upstream
+
+This project derives from [this gist](https://gist.github.com/bartoszmajsak/1396344).
