@@ -13,6 +13,6 @@ BRANCH_NAME=$(sed -e 's/^.*\/\(DG-[[:digit:]]\+\).*$/\1/g' <<<STRIPPED_BRANCH_NA
 BRANCH_EXCLUDED=$(printf "%s\n" "${BRANCHES_TO_SKIP[@]}" | grep -c "^$BRANCH_NAME$")
 BRANCH_IN_COMMIT=$(grep -c "\[$BRANCH_NAME\]" $1)
 
-if [ -n "$BRANCH_NAME" ] && ! [[ $BRANCH_EXCLUDED -eq 1 ]] && ! [[ $BRANCH_IN_COMMIT -ge 1 ]]; then 
+if [ -n "$BRANCH_NAME" ] && ! [[ $BRANCH_EXCLUDED -eq 1 ]] && ! [[ $BRANCH_IN_COMMIT -ge 1 ]] && [[ "$BRANCH_NAME" -ne "$STRIPPED_BRANCH_NAME" ]] ; then
   sed -i.bak -e "1s/^/[$BRANCH_NAME] /" $1
 fi
