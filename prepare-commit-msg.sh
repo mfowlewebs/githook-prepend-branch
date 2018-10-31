@@ -6,7 +6,9 @@ if [ -z "$BRANCHES_TO_SKIP" ]; then
   BRANCHES_TO_SKIP=(master develop test)
 fi
 
-BRANCH_NAME=$(git symbolic-ref --short HEAD | sed -e 's/^.*\/\(DG-[[:digit:]]\+\).*$/\1/g')
+ORIGINAL_BRANCH_NAME=$(git symbolic-ref --short HEAD)
+STRIPPED_BRANCH_NAME=${ORIGINAL_BRANCH_NAME##*/}
+BRANCH_NAME=$(sed -e 's/^.*\/\(DG-[[:digit:]]\+\).*$/\1/g' <<<STRIPPED_BRANCH_NAME)
 
 BRANCH_EXCLUDED=$(printf "%s\n" "${BRANCHES_TO_SKIP[@]}" | grep -c "^$BRANCH_NAME$")
 BRANCH_IN_COMMIT=$(grep -c "\[$BRANCH_NAME\]" $1)
